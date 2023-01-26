@@ -1,0 +1,72 @@
+<script type="text/x-red" data-template-name="proxmox-backup-server-api">
+<div class="form-row">
+	<label for="node-input-server"><i class="icon-tag"></i> Proxmox Backup Server</label>
+	<input type="text" id="node-input-server" placeholder="Server">
+</div>
+<div class="form-row">
+	<label for="node-input-name"><i class="icon-tag"></i> Name</label>
+	<input type="text" id="node-input-name" placeholder="Name">
+</div>
+<div class="form-row">
+	<label for="node-input-path"><i class="icon-tag"></i> Path</label>
+	<input type="text" id="node-input-path" placeholder="i.e. /version">
+</div>
+<div class="form-row">
+	<label for="node-input-method"><i class="fa fa-tasks"></i> Method</label>
+	<select type="text" id="node-input-method" style="width:70%;">
+		<option value="GET">GET</option>
+		<option value="POST">POST</option>
+		<option value="PUT">PUT</option>
+		<option value="DELETE">DELETE</option>
+	</select>
+</div>
+<div class="form-row node-input-payload-row hide">
+	<label for="node-input-payload"><i class="icon-tag"></i> Payload</label>
+	<textarea rows=5 style="width: 70%" id="node-input-payload" placeholder="JSON Payload"></textarea>
+</div>
+</script>
+
+<script type="text/x-red" data-help-name="proxmox-backup-server-api">
+<p>This is a node access the Proxmox Backup Server API</p>
+<p>Upon a trigger, this node will call the API path indicated. The results of the call will be set as the value of <code>msg.payload</code></p>
+<p>The folowing values can be set on the <code>msg</code> object and they will overwrite any manually entered settings:
+<ul>
+<li><code>msg.path</code>: The API path to query. List of available paths is available at the API documentation link below.</li>
+<li><code>msg.method</code>: A method from the following list: GET, POST, PUT, DELETE. PUT and POST require additional information to be passed in the payload</li>
+<li><code>msg.payload</code>: Body of the message to be sent on POST & PUT requests. See API docs for proper values. </li>
+</ul>
+
+<p>See the <a href="https://pbs.proxmox.com/docs/api-viewer/index.html">Proxmox Backup Server API Documentation</a> for further details.</p>
+<p>Proxmox version 4.4</p>
+</script>
+
+<script type="text/javascript">
+RED.nodes.registerType('proxmox-backup-server-api',{
+	category: 'proxmox',
+	color: '#a6bbcf',
+	defaults: {
+		name: {value:""},
+		path: {value:""},
+		method: {value:""},
+		payload: {value:""},
+		server: {value:"", type:"proxmox-backup-server"},
+	},
+	inputs:1,
+	outputs:1,
+	icon: "white-globe.png",
+	label: function() {
+		return this.name||"proxmox-backup-server-api";
+	},
+	oneditprepare: function() {
+		
+			$("#node-input-method").change(function() {
+                if (["PUT", "POST"].includes($(this).val())) {
+                    $(".node-input-payload-row").show();
+                } else {
+                    $(".node-input-payload-row").hide();
+                    $('#node-input-payload').val('');
+                }
+            });
+	}
+});
+</script>

@@ -1,0 +1,17 @@
+{
+    "name"         : "node-red-contrib-proxmox-backup-server",
+    "version"      : "0.0.2",
+    "description"  : "A Proxmox Backup Server node for node-red",
+    "dependencies": {
+        "request": ">=2.31.0",
+        "request-promise": ">=2.0.0"
+    },
+    "keywords": [ "node-red" ],
+    "license": "MIT" ,
+    "node-red"     : {
+        "nodes": {
+            "proxmox-backup-server-api": "proxmox-backup-server/proxmox-backup-server-api.js",
+            "proxmox-backup-server": "proxmox-backup-server/proxmox-backup-server.js"
+        }
+    }
+}
