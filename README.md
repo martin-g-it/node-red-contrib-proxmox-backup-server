@@ -19,4 +19,5 @@ The folowing values can be set on the `msg` object and they will overwrite any m
 
 See the [Proxmox Backup Server API Documentation](https://pbs.proxmox.com/docs/api-viewer/index.html) for further details.
 
-Tested with Proxmox Backup Server version 2.3-2
+Tested with Proxmox Backup Server version 2.3-2 to 3.2-7
+
