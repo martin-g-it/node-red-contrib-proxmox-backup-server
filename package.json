@@ -1,6 +1,6 @@
 {
     "name"         : "node-red-contrib-proxmox-backup-server",
-    "version"      : "0.0.2",
+    "version"      : "0.0.3",
     "description"  : "A Proxmox Backup Server node for node-red",
     "dependencies": {
         "request": ">=2.31.0",
